@@ -3,6 +3,7 @@ import 'package:forsat/presentation/Opportunties/opportunities_page.dart';
 import 'package:forsat/presentation/auth/account_page.dart';
 import 'package:forsat/presentation/favorities/favorities_page.dart';
 import 'package:forsat/presentation/forum/questions_page.dart';
+import 'package:forsat/values/branding_color.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -50,47 +51,49 @@ class _HomePageState extends State<HomePage> {
             title: Text(
               "Opportunites",
               style: TextStyle(
-                color: _selectedIndex == 0 ? Colors.blue : Colors.grey,
+                color: _selectedIndex == 0 ? brandingPrimaryColor : Colors.grey,
               ),
             ),
             icon: Icon(
               Icons.home,
-              color: _selectedIndex == 0 ? Colors.blue : Colors.grey,
+              color: _selectedIndex == 0 ? brandingPrimaryColor : Colors.grey,
             ),
           ),
           BottomNavigationBarItem(
               title: Text(
                 "Forum",
                 style: TextStyle(
-                  color: _selectedIndex == 1 ? Colors.blue : Colors.grey,
+                  color:
+                      _selectedIndex == 1 ? brandingPrimaryColor : Colors.grey,
                 ),
               ),
               icon: Icon(
                 Icons.chat,
-                color: _selectedIndex == 1 ? Colors.blue : Colors.grey,
+                color: _selectedIndex == 1 ? brandingPrimaryColor : Colors.grey,
               )),
           BottomNavigationBarItem(
             title: Text(
               "Favorities",
               style: TextStyle(
-                color: _selectedIndex == 2 ? Colors.blue : Colors.grey,
+                color: _selectedIndex == 2 ? brandingPrimaryColor : Colors.grey,
               ),
             ),
             icon: Icon(
               Icons.favorite,
-              color: _selectedIndex == 2 ? Colors.blue : Colors.grey,
+              color: _selectedIndex == 2 ? brandingPrimaryColor : Colors.grey,
             ),
           ),
           BottomNavigationBarItem(
               title: Text(
                 "Account",
                 style: TextStyle(
-                  color: _selectedIndex == 3 ? Colors.blue : Colors.grey,
+                  color:
+                      _selectedIndex == 3 ? brandingPrimaryColor : Colors.grey,
                 ),
               ),
               icon: Icon(
                 Icons.person,
-                color: _selectedIndex == 3 ? Colors.blue : Colors.grey,
+                color: _selectedIndex == 3 ? brandingPrimaryColor : Colors.grey,
               )),
         ],
       ),

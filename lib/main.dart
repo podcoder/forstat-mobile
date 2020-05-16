@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forsat/router/route_constants.dart';
 import 'package:forsat/router/router.dart';
+import 'package:forsat/values/branding_color.dart';
 
 void main() {
   runApp(Forsat());
@@ -13,11 +14,11 @@ class Forsat extends StatelessWidget {
       title: 'Forsat',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: brandingColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: Router.onGenerateRoute,
-      initialRoute: homeRoute,
+      initialRoute: signInRoute,
     );
   }
 }
