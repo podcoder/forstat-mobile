@@ -34,7 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: ListView(
               children: <Widget>[
                 Container(
-                  height: 250,
+                  height: 200,
                   child: Center(
                     child: Image.asset(Images.logo),
                   ),
@@ -53,6 +53,28 @@ class _SignUpPageState extends State<SignUpPage> {
                             : null,
                         prefixIcon: Icon(Icons.person),
                         hintText: "Enter your first name",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                buildSizedBox(15),
+                StateBuilder<SignUpFormModel>(
+                  builder: (context, signUpFormMode) {
+                    return TextFormField(
+                      onChanged: (String lastName) {
+                        signUpFormMode.setState(
+                            (state) => state.setLastName(lastName),
+                            catchError: true);
+                      },
+                      decoration: InputDecoration(
+                        errorText: signUpFormMode.hasError
+                            ? signUpFormMode.error.message
+                            : null,
+                        prefixIcon: Icon(Icons.person),
+                        hintText: "Enter your last name",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -97,7 +119,30 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? signFormModel.error.message
                             : null,
                         prefixIcon: Icon(Icons.lock),
-                        hintText: "Enter your password",
+                        hintText: "Enter a password",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                      ),
+                    );
+                  },
+                ),
+                buildSizedBox(15),
+                StateBuilder<SignUpFormModel>(
+                  builder: (_, signFormModel) {
+                    return TextFormField(
+                      onChanged: (String passwordConfirmation) {
+                        signFormModel.setState(
+                            (state) => state
+                                .setPasswordConfirmation(passwordConfirmation),
+                            catchError: true);
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        errorText: signFormModel.hasError
+                            ? signFormModel.error.message
+                            : null,
+                        prefixIcon: Icon(Icons.lock),
+                        hintText: "Enter password confirmation",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30)),
                       ),
@@ -113,8 +158,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         if (!_singletonSignUpFormModel.state.validateData()) {
                           _key.currentState.showSnackBar(SnackBar(
                             backgroundColor: Colors.red,
-                            content: Text("Data is invalid"),
+                            content: Text(
+                                "Invalid data, kindly fill the form correctly!"),
                           ));
+                        } else {
+                          _singletonSignUpFormModel.state.submitSignUp();
                         }
                       },
                       height: 55,

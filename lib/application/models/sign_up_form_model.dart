@@ -11,6 +11,10 @@ class SignUpFormModel {
     this.firstName = firstName;
   }
 
+  void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
   void setEmail(String email) {
     // check the email validation
     if (!validateEmail(email)) {
@@ -29,11 +33,21 @@ class SignUpFormModel {
     this.password = password;
   }
 
+  void setPasswordConfirmation(String passwordConfirmation) {
+    if (this.password != this.passwordConfirmation) {
+      throw CommonError(message: "Password does not match");
+    }
+    this.passwordConfirmation = passwordConfirmation;
+  }
+
   bool validateData() {
-    return this.email != null &&
+    return this.firstName != null &&
+        this.lastName != null &&
+        this.email != null &&
+        this.validateEmail(this.email) &&
         this.password != null &&
         this.password.length > 6 &&
-        this.validateEmail(this.email);
+        this.password == this.passwordConfirmation;
   }
 
   bool validateEmail(String email) {
@@ -41,4 +55,7 @@ class SignUpFormModel {
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(email);
   }
+
+  // Submit the Sign Up form to the server
+  void submitSignUp() {}
 }

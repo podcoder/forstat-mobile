@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forsat/application/models/sign_in_form_model.dart';
 import 'package:forsat/router/route_constants.dart';
-import 'package:forsat/values/branding_color.dart';
 import 'package:forsat/values/images.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
@@ -17,7 +16,6 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("Calling build method");
     return Scaffold(
       key: _key,
       appBar: AppBar(
@@ -93,7 +91,8 @@ class _SignInPageState extends State<SignInPage> {
                         if (!_singletonSignInFormModel.state.validateData()) {
                           _key.currentState.showSnackBar(SnackBar(
                             backgroundColor: Colors.red,
-                            content: Text("Data is invalid"),
+                            content: Text(
+                                "Data is invalid, please fill the form before submitting!"),
                           ));
                         }
                       },

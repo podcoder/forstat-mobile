@@ -35,7 +35,7 @@ class SignInFormModel {
         .hasMatch(email);
   }
 
-  signInUser() {
+  submitSignIn() {
     // authenticate
   }
 }
