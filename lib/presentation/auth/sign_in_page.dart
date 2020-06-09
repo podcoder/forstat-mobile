@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:forsat/application/models/sign_in_form_model.dart';
+import 'package:forsat/application/models/auth/sign_in_form_model.dart';
 import 'package:forsat/router/route_constants.dart';
 import 'package:forsat/values/images.dart';
+import 'package:forsat/widgets/show_snackbar.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class SignInPage extends StatefulWidget {
@@ -89,11 +90,19 @@ class _SignInPageState extends State<SignInPage> {
                     return MaterialButton(
                       onPressed: () {
                         if (!_singletonSignInFormModel.state.validateData()) {
-                          _key.currentState.showSnackBar(SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text(
-                                "Data is invalid, please fill the form before submitting!"),
-                          ));
+                          showSnackbar(
+                              color: Colors.red,
+                              key: _key,
+                              message:
+                                  "Data is invalid, please fill the form before submitting!");
+                        } else {
+                          _singletonSignInFormModel.setState(
+                            (signInFormState) => signInFormState.submitSignIn(),
+                            onError: (context, error) => showSnackbar(
+                                color: Colors.red,
+                                key: _key,
+                                message: "${error.message}"),
+                          );
                         }
                       },
                       height: 55,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:forsat/application/models/sign_up_form_model.dart';
+import 'package:forsat/application/models/auth/sign_up_form_model.dart';
 import 'package:forsat/router/route_constants.dart';
 import 'package:forsat/values/branding_color.dart';
 import 'package:forsat/values/images.dart';
+import 'package:forsat/widgets/show_snackbar.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -156,11 +157,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     return MaterialButton(
                       onPressed: () {
                         if (!_singletonSignUpFormModel.state.validateData()) {
-                          _key.currentState.showSnackBar(SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text(
-                                "Invalid data, kindly fill the form correctly!"),
-                          ));
+                          showSnackbar(
+                            key: _key,
+                            message:
+                                "Invalid data, kindly fill the form correctly!",
+                            color: Colors.red,
+                          );
                         } else {
                           _singletonSignUpFormModel.state.submitSignUp();
                         }

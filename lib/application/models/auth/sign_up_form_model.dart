@@ -1,6 +1,10 @@
-import 'package:forsat/application/classes/common_error.dart';
+import 'package:forsat/application/classes/errors/common_error.dart';
+import 'package:forsat/application/state/auth_state.dart';
+import 'package:states_rebuilder/states_rebuilder.dart';
 
 class SignUpFormModel {
+  final AuthState _authState = Injector.get<AuthState>();
+
   String firstName;
   String lastName;
   String email;
@@ -29,12 +33,11 @@ class SignUpFormModel {
     if (password.length < 6) {
       throw CommonError(message: "Password lenght should be more than 6 chars");
     }
-
     this.password = password;
   }
 
   void setPasswordConfirmation(String passwordConfirmation) {
-    if (this.password != this.passwordConfirmation) {
+    if (this.password != passwordConfirmation) {
       throw CommonError(message: "Password does not match");
     }
     this.passwordConfirmation = passwordConfirmation;
@@ -46,7 +49,7 @@ class SignUpFormModel {
         this.email != null &&
         this.validateEmail(this.email) &&
         this.password != null &&
-        this.password.length > 6 &&
+        this.password.length >= 6 &&
         this.password == this.passwordConfirmation;
   }
 
@@ -57,5 +60,13 @@ class SignUpFormModel {
   }
 
   // Submit the Sign Up form to the server
-  void submitSignUp() {}
+  void submitSignUp() async {
+    await _authState.signUp(
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      password: this.password,
+      passwordConfirmation: this.passwordConfirmation,
+    );
+  }
 }
