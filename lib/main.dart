@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:forsat/application/repositories/auth_repository.dart';
 import 'package:forsat/application/state/auth_state.dart';
+import 'package:forsat/application/storage/localstorage.dart';
+import 'package:forsat/application/storage/storage_keys.dart';
 import 'package:forsat/router/route_constants.dart';
 import 'package:forsat/router/router.dart';
 import 'package:forsat/values/branding_color.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.initializeSharedPreferences();
   runApp(Forsat());
 }
 
@@ -24,7 +28,8 @@ class Forsat extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           onGenerateRoute: Router.onGenerateRoute,
-          initialRoute: signInRoute,
+          initialRoute:
+              LocalStorage.getItem(TOKEN) != null ? homeRoute : signInRoute,
         );
       },
     );

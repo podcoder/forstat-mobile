@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:forsat/application/classes/errors/common_error.dart';
 import 'package:forsat/application/forsat_api.dart';
+import 'package:forsat/application/storage/localstorage.dart';
+import 'package:forsat/application/storage/storage_keys.dart';
 
 abstract class AuthRepository {
   Future signIn({
@@ -29,6 +31,11 @@ class AuthRepositoryImpl implements AuthRepository {
         "/api/auth/login",
         data: {"email": email, "password": password},
       );
+      String accessToken = response.data['accessToken'];
+      String expiresAt = response.data['expiresAt'];
+      await LocalStorage.setItem(TOKEN, accessToken);
+      await LocalStorage.setItem(TOKEN_EXPIRATION, expiresAt);
+      return;
     } on DioError catch (e) {
       showNetworkError(e);
     }

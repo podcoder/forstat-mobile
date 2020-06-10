@@ -51,49 +51,47 @@ class _HomePageState extends State<HomePage> {
             title: Text(
               "Opportunites",
               style: TextStyle(
-                color: _selectedIndex == 0 ? brandingPrimaryColor : Colors.grey,
+                color: _selectedIndex == 0 ? brandingColor : Colors.grey,
               ),
             ),
             icon: Icon(
               Icons.home,
-              color: _selectedIndex == 0 ? brandingPrimaryColor : Colors.grey,
+              color: _selectedIndex == 0 ? brandingColor : Colors.grey,
             ),
           ),
           BottomNavigationBarItem(
               title: Text(
                 "Forum",
                 style: TextStyle(
-                  color:
-                      _selectedIndex == 1 ? brandingPrimaryColor : Colors.grey,
+                  color: _selectedIndex == 1 ? brandingColor : Colors.grey,
                 ),
               ),
               icon: Icon(
                 Icons.chat,
-                color: _selectedIndex == 1 ? brandingPrimaryColor : Colors.grey,
+                color: _selectedIndex == 1 ? brandingColor : Colors.grey,
               )),
           BottomNavigationBarItem(
             title: Text(
               "Favorities",
               style: TextStyle(
-                color: _selectedIndex == 2 ? brandingPrimaryColor : Colors.grey,
+                color: _selectedIndex == 2 ? brandingColor : Colors.grey,
               ),
             ),
             icon: Icon(
               Icons.favorite,
-              color: _selectedIndex == 2 ? brandingPrimaryColor : Colors.grey,
+              color: _selectedIndex == 2 ? brandingColor : Colors.grey,
             ),
           ),
           BottomNavigationBarItem(
               title: Text(
                 "Account",
                 style: TextStyle(
-                  color:
-                      _selectedIndex == 3 ? brandingPrimaryColor : Colors.grey,
+                  color: _selectedIndex == 3 ? brandingColor : Colors.grey,
                 ),
               ),
               icon: Icon(
                 Icons.person,
-                color: _selectedIndex == 3 ? brandingPrimaryColor : Colors.grey,
+                color: _selectedIndex == 3 ? brandingColor : Colors.grey,
               )),
         ],
       ),

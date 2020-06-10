@@ -39,7 +39,7 @@ class SignInFormModel {
         .hasMatch(email);
   }
 
-  submitSignIn() async {
-    await _authState.signIn(email: this.email, password: this.password);
+  Future<void> submitSignIn() async {
+    return await _authState.signIn(email: this.email, password: this.password);
   }
 }

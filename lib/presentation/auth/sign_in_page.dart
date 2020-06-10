@@ -97,7 +97,10 @@ class _SignInPageState extends State<SignInPage> {
                                   "Data is invalid, please fill the form before submitting!");
                         } else {
                           _singletonSignInFormModel.setState(
-                            (signInFormState) => signInFormState.submitSignIn(),
+                            (signInFormState) async {
+                              await signInFormState.submitSignIn();
+                              Navigator.pushNamed(context, homeRoute);
+                            },
                             onError: (context, error) => showSnackbar(
                                 color: Colors.red,
                                 key: _key,
