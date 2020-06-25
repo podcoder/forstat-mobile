@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:forsat/application/state/opportunity_state.dart';
+import 'package:forsat/application/state/opportunity_state.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class OpportunitiesPage extends StatefulWidget {
@@ -11,12 +11,12 @@ class OpportunitiesPage extends StatefulWidget {
 
 class _OpportunitiesPageState extends State<OpportunitiesPage>
     with AutomaticKeepAliveClientMixin {
-  // final _opportunitiesStateRM = Injector.getAsReactive<OpportunityState>();
+  final _opportunitiesStateRM = Injector.getAsReactive<OpportunityState>();
 
   @override
   void initState() {
-    // _opportunitiesStateRM
-    //     .setState((opportunityState) => opportunityState.getAllOpportunities());
+    _opportunitiesStateRM
+        .setState((opportunityState) => opportunityState.getAllOpportunities());
     super.initState();
   }
 
