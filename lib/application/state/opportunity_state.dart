@@ -6,7 +6,7 @@ class OpportunityState {
 
   OpportunityState(this._opportunityRepository);
 
-  List<Opportunity> _opportunities;
+  List<Opportunity> _opportunities = [];
   List<Opportunity> get opportunities => _opportunities;
 
   Future getAllOpportunities() async {

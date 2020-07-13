@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forsat/application/state/opportunity_state.dart';
+import 'package:forsat/values/images.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class OpportunitiesPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class OpportunitiesPage extends StatefulWidget {
 
 class _OpportunitiesPageState extends State<OpportunitiesPage>
     with AutomaticKeepAliveClientMixin {
-  final _opportunitiesStateRM = Injector.getAsReactive<OpportunityState>();
+  final _opportunitiesStateRM = RM.get<OpportunityState>();
 
   @override
   void initState() {
@@ -23,16 +24,104 @@ class _OpportunitiesPageState extends State<OpportunitiesPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    TextStyle _iconTextStyle = TextStyle(
+        fontFamily: 'Dosis', fontSize: 12, fontWeight: FontWeight.w600);
+    double _iconSize = 20;
     return Scaffold(
       appBar: AppBar(
         title: Text('Opportunities Page'),
       ),
       body: SingleChildScrollView(
-        child: StateBuilder(
-          models: [],
-          builder: (_, model) {
+        child: StateBuilder<OpportunityState>(
+          observe: () => _opportunitiesStateRM,
+          builder: (context, model) {
             return Column(
-              children: <Widget>[],
+              children: <Widget>[
+                ...model.state.opportunities.map(
+                  (opportunity) => Column(
+                    children: <Widget>[
+                      Image.asset(Images.testImage),
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                        child: Text("${opportunity.title}",
+                            style: TextStyle(
+                                fontFamily: 'Dosis',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          FlatButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.school,
+                                  size: _iconSize,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "${opportunity.category.name}",
+                                  style: _iconTextStyle,
+                                )
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.remove_red_eye,
+                                size: _iconSize,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "134",
+                                style: _iconTextStyle,
+                              )
+                            ],
+                          ),
+                          FlatButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.share,
+                                  size: _iconSize,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text("Share", style: _iconTextStyle)
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.event,
+                                size: _iconSize,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "${opportunity.deadline}",
+                                style: _iconTextStyle,
+                              )
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
             );
           },
         ),

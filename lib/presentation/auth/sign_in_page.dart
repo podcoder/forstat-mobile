@@ -28,8 +28,7 @@ class _SignInPageState extends State<SignInPage> {
       body: Injector(
         inject: [Inject<SignInFormModel>(() => SignInFormModel())],
         builder: (context) {
-          final _singletonSignInFormModel =
-              Injector.getAsReactive<SignInFormModel>();
+          final _singletonSignInFormModel = RM.get<SignInFormModel>();
           return Container(
             padding: EdgeInsets.all(16),
             child: ListView(
@@ -85,7 +84,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 buildSizedBox(25),
                 StateBuilder(
-                  models: [_singletonSignInFormModel],
+                  observe: () => _singletonSignInFormModel,
                   builder: (_, model) {
                     return MaterialButton(
                       onPressed: () {

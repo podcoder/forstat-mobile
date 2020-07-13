@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forsat/application/models/auth/sign_up_form_model.dart';
+import 'package:forsat/application/state/auth_state.dart';
 import 'package:forsat/router/route_constants.dart';
 import 'package:forsat/values/branding_color.dart';
 import 'package:forsat/values/images.dart';
@@ -28,8 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: Injector(
         inject: [Inject<SignUpFormModel>(() => SignUpFormModel())],
         builder: (context) {
-          final _singletonSignUpFormModel =
-              Injector.getAsReactive<SignUpFormModel>();
+          final _singletonSignUpFormModel = RM.get<SignUpFormModel>();
           return Container(
             padding: EdgeInsets.all(16),
             child: ListView(
@@ -152,7 +152,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 buildSizedBox(25),
                 StateBuilder(
-                  models: [_singletonSignUpFormModel],
+                  observe: () => _singletonSignUpFormModel,
                   builder: (_, model) {
                     return MaterialButton(
                       onPressed: () {
