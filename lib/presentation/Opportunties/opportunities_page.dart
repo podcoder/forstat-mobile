@@ -13,12 +13,28 @@ class OpportunitiesPage extends StatefulWidget {
 class _OpportunitiesPageState extends State<OpportunitiesPage>
     with AutomaticKeepAliveClientMixin {
   final _opportunitiesStateRM = RM.get<OpportunityState>();
+  ScrollController _scrollController;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
+    _scrollController = ScrollController();
+    _getNewOpportunties();
+    _scrollController.addListener(() {
+      double currentPosition = _scrollController.position.pixels;
+      double maxScrollExtent = _scrollController.position.maxScrollExtent;
+
+      if (currentPosition >= maxScrollExtent &&
+          !_opportunitiesStateRM.state.loading) {
+        _getNewOpportunties();
+      }
+    });
+
+    super.didChangeDependencies();
+  }
+
+  void _getNewOpportunties() {
     _opportunitiesStateRM
         .setState((opportunityState) => opportunityState.getAllOpportunities());
-    super.initState();
   }
 
   @override
@@ -32,6 +48,7 @@ class _OpportunitiesPageState extends State<OpportunitiesPage>
         title: Text('Opportunities Page'),
       ),
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: StateBuilder<OpportunityState>(
           observe: () => _opportunitiesStateRM,
           builder: (context, model) {
@@ -81,7 +98,7 @@ class _OpportunitiesPageState extends State<OpportunitiesPage>
                                 width: 5,
                               ),
                               Text(
-                                "134",
+                                "${opportunity.id}",
                                 style: _iconTextStyle,
                               )
                             ],
