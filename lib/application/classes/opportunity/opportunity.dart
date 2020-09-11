@@ -28,8 +28,8 @@ class Opportunity {
         createdBy =
             jsonMap['user'] != null ? User.fromJson(jsonMap['user']) : null,
         organizer = jsonMap['organizer'] ?? "",
-        opportuityDetail = jsonMap['opportuityDetail'] != null
-            ? OpportunityDetail.fromJson(jsonMap['opportuityDetail'])
+        opportuityDetail = jsonMap['opportunityDetail'] != null
+            ? OpportunityDetail.fromJson(jsonMap['opportunityDetail'])
             : null,
         createdAt = jsonMap['createdAt'] ?? "",
         updatedAt = jsonMap['updatedAt'] ?? "";

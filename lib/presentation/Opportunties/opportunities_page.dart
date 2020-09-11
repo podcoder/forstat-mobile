@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forsat/application/state/opportunity_state.dart';
+import 'package:forsat/router/route_constants.dart';
 import 'package:forsat/values/images.dart';
+import 'package:forsat/widgets/opportunity_links_widget.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class OpportunitiesPage extends StatefulWidget {
@@ -40,9 +42,7 @@ class _OpportunitiesPageState extends State<OpportunitiesPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    TextStyle _iconTextStyle = TextStyle(
-        fontFamily: 'Dosis', fontSize: 12, fontWeight: FontWeight.w600);
-    double _iconSize = 20;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Opportunities Page'),
@@ -55,87 +55,28 @@ class _OpportunitiesPageState extends State<OpportunitiesPage>
             return Column(
               children: <Widget>[
                 ...model.state.opportunities.map(
-                  (opportunity) => Column(
-                    children: <Widget>[
-                      Image.asset(Images.testImage),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                        child: Text("${opportunity.title}",
-                            style: TextStyle(
-                                fontFamily: 'Dosis',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          FlatButton(
-                            onPressed: () {},
-                            child: Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.school,
-                                  size: _iconSize,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "${opportunity.category.name}",
-                                  style: _iconTextStyle,
-                                )
-                              ],
-                            ),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.remove_red_eye,
-                                size: _iconSize,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "${opportunity.id}",
-                                style: _iconTextStyle,
-                              )
-                            ],
-                          ),
-                          FlatButton(
-                            onPressed: () {},
-                            child: Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.share,
-                                  size: _iconSize,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text("Share", style: _iconTextStyle)
-                              ],
-                            ),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.event,
-                                size: _iconSize,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "${opportunity.deadline}",
-                                style: _iconTextStyle,
-                              )
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
+                  (opportunity) => GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, opportunityDetailRoute,
+                          arguments: opportunity);
+                    },
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset(Images.testImage),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                          child: Text("${opportunity.title}",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600)),
+                        ),
+                        OpportunityLinsWidget(
+                          categoryName: opportunity.category.name,
+                          views: opportunity.id.toString(),
+                          deadline: opportunity.deadline,
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],

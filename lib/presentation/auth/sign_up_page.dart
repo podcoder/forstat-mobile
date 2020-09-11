@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:forsat/application/models/auth/sign_up_form_model.dart';
-import 'package:forsat/application/state/auth_state.dart';
 import 'package:forsat/router/route_constants.dart';
 import 'package:forsat/values/branding_color.dart';
 import 'package:forsat/values/images.dart';
