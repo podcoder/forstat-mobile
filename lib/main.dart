@@ -8,7 +8,7 @@ import 'package:forsat/application/state/opportunity_state.dart';
 import 'package:forsat/application/storage/localstorage.dart';
 import 'package:forsat/application/storage/storage_keys.dart';
 import 'package:forsat/router/route_constants.dart';
-import 'package:forsat/router/router.dart';
+import 'package:forsat/router/router.dart' as AppRouter;
 import 'package:forsat/values/branding_color.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
@@ -37,7 +37,7 @@ class Forsat extends StatelessWidget {
             primarySwatch: brandingColor,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          onGenerateRoute: Router.onGenerateRoute,
+          onGenerateRoute: AppRouter.Router.onGenerateRoute,
           initialRoute:
               LocalStorage.getItem(TOKEN) != null ? homeRoute : signInRoute,
         );

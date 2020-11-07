@@ -24,14 +24,11 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedIndex = 0;
 
-  void _onPageChanged(int pageIndex) {
-    setState(() {
-      _selectedIndex = pageIndex;
-    });
-  }
-
   void _onItemTapped(int itemIndex) {
     _pageController.jumpToPage(itemIndex);
+    setState(() {
+      _selectedIndex = itemIndex;
+    });
   }
 
   @override
@@ -40,59 +37,37 @@ class _HomePageState extends State<HomePage> {
       body: PageView(
         children: _screens,
         controller: _pageController,
-        onPageChanged: _onPageChanged,
         physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        selectedIconTheme: IconThemeData(color: brandingColor, size: 25),
         items: [
           BottomNavigationBarItem(
-            title: Text(
-              "Opportunites",
-              style: TextStyle(
-                color: _selectedIndex == 0 ? brandingColor : Colors.grey,
-              ),
-            ),
+            label: "Opportunites",
             icon: Icon(
               Icons.home,
-              color: _selectedIndex == 0 ? brandingColor : Colors.grey,
             ),
           ),
           BottomNavigationBarItem(
-              title: Text(
-                "Forum",
-                style: TextStyle(
-                  color: _selectedIndex == 1 ? brandingColor : Colors.grey,
-                ),
-              ),
+              label: "Forum",
               icon: Icon(
                 Icons.chat,
-                color: _selectedIndex == 1 ? brandingColor : Colors.grey,
               )),
           BottomNavigationBarItem(
-            title: Text(
-              "Favorities",
-              style: TextStyle(
-                color: _selectedIndex == 2 ? brandingColor : Colors.grey,
-              ),
-            ),
+            label: "Favorities",
             icon: Icon(
               Icons.favorite,
-              color: _selectedIndex == 2 ? brandingColor : Colors.grey,
             ),
           ),
           BottomNavigationBarItem(
-              title: Text(
-                "Account",
-                style: TextStyle(
-                  color: _selectedIndex == 3 ? brandingColor : Colors.grey,
-                ),
-              ),
-              icon: Icon(
-                Icons.person,
-                color: _selectedIndex == 3 ? brandingColor : Colors.grey,
-              )),
+            label: "Account",
+            icon: Icon(
+              Icons.person,
+            ),
+          ),
         ],
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forsat/application/state/forum_state.dart';
+import 'package:forsat/router/route_constants.dart';
 import 'package:forsat/values/images.dart';
+import 'package:forsat/widgets/created_by_info_widget.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class QuestionsPage extends StatefulWidget {
@@ -53,38 +55,19 @@ class _QuestionsPageState extends State<QuestionsPage>
                   children: [
                     ...model.state.questions.map(
                       (question) => GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, questionDetail,
+                              arguments: question);
+                        },
                         child: Container(
                           margin: EdgeInsets.only(top: 20),
                           child: Column(
                             children: [
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage(Images.testImage),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "${question.createdBy.firstName} ${question.createdBy.lastName}",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text("${question.createdBy.email}")
-                                      ],
-                                    ),
-                                  ),
-                                  Text("2 days ago")
-                                ],
+                              CreatedByInfoWidget(
+                                fullName:
+                                    "${question.createdBy.firstName} ${question.createdBy.lastName}",
+                                email: "${question.createdBy.email}",
+                                createdAt: "2 days ago",
                               ),
                               SizedBox(
                                 height: 10,

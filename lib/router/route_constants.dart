@@ -12,6 +12,7 @@ const String accountRoute = "account";
 
 // Forum
 const String forumRoute = "forum";
+const String questionDetail = "questionDetail";
 
 // Favorities
 const String favoritiesRoute = "favorities";

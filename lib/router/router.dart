@@ -3,6 +3,7 @@ import 'package:forsat/presentation/Opportunties/opportunities_page.dart';
 import 'package:forsat/presentation/Opportunties/opportunity_detail.dart';
 import 'package:forsat/presentation/auth/sign_in_page.dart';
 import 'package:forsat/presentation/auth/sign_up_page.dart';
+import 'package:forsat/presentation/forum/question_detail_page.dart';
 import 'package:forsat/presentation/home/home_page.dart';
 import 'package:forsat/presentation/not_found/not_found_page.dart';
 import 'package:forsat/router/route_constants.dart';
@@ -19,6 +20,11 @@ class Router {
         return MaterialPageRoute(builder: (_) => HomePage());
       case signInRoute:
         return MaterialPageRoute(builder: (_) => SignInPage());
+      case questionDetail:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => QuestionDetailPage(),
+        );
       case signUpRoute:
         return MaterialPageRoute(builder: (_) => SignUpPage());
 
