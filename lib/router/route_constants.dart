@@ -1,6 +1,7 @@
 // Opportunities
 const String opportunitiesRoute = "opportunities";
 const String opportunityDetailRoute = "opportunitiesDetail";
+const String addNewOpportunity = "addNewOpportunity";
 
 // home
 const String homeRoute = "home";

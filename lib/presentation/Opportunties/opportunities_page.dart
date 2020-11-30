@@ -84,6 +84,12 @@ class _OpportunitiesPageState extends State<OpportunitiesPage>
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, addNewOpportunity);
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 

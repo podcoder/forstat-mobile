@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forsat/presentation/Opportunties/add_new_opportunity_page.dart';
 import 'package:forsat/presentation/Opportunties/opportunities_page.dart';
 import 'package:forsat/presentation/Opportunties/opportunity_detail.dart';
 import 'package:forsat/presentation/auth/sign_in_page.dart';
@@ -16,6 +17,9 @@ class Router {
       case opportunityDetailRoute:
         return MaterialPageRoute(
             settings: routeSettings, builder: (_) => OpportunityDetailPage());
+
+      case addNewOpportunity:
+        return MaterialPageRoute(builder: (_) => AddNewOpportunityPage());
       case homeRoute:
         return MaterialPageRoute(builder: (_) => HomePage());
       case signInRoute:
